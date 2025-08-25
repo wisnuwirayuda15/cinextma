@@ -1,3 +1,4 @@
+import { SpacingClasses } from "@/utils/constants";
 import { siteConfig } from "@/config/site";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import { cn } from "@/utils/helpers";
@@ -36,7 +37,7 @@ const MoviePlayer: React.FC<MoviePlayerProps> = ({ movie }) => {
     <>
       <AdsWarning />
 
-      <div className="relative -mx-3 -my-8 sm:-mx-5">
+      <div className={cn("relative", SpacingClasses.reset)}>
         <MoviePlayerHeader
           id={movie.id}
           movieName={title}

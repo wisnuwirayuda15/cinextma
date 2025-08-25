@@ -8,6 +8,7 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import { memo, useMemo } from "react";
 import { Episode } from "tmdb-ts";
 import useBreakpoints from "@/hooks/useBreakpoints";
+import { SpacingClasses } from "@/utils/constants";
 const AdsWarning = dynamic(() => import("@/components/ui/overlay/AdsWarning"));
 const TvShowPlayerHeader = dynamic(() => import("./Header"));
 const TvShowPlayerSourceSelection = dynamic(() => import("./SourceSelection"));
@@ -44,7 +45,7 @@ const TvShowPlayer: React.FC<TvShowPlayerProps> = ({ id, episode, episodes, ...p
     <>
       <AdsWarning />
 
-      <div className="relative -mx-3 -my-8 sm:-mx-5">
+      <div className={cn("relative", SpacingClasses.reset)}>
         <TvShowPlayerHeader
           id={id}
           episode={episode}

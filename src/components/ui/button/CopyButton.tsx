@@ -42,7 +42,7 @@ const CopyButton: React.FC<CopyButtonProps> = ({
 
   return (
     <button onClick={handleCopy} disabled={copied} className="flex items-center gap-2">
-      <IconButton as="div" {...buttonProps} />
+      <IconButton {...buttonProps} />
       <p className="text-medium">{label}</p>
     </button>
   );

@@ -13,6 +13,7 @@
     "@designbycode/tailwindcss-text-shadow": "^2.2.1",
     "@ducanh2912/next-pwa": "^10.2.9",
     "@heroui/react": "^2.7.11",
+    "@hookform/resolvers": "^5.2.1",
     "@mantine/hooks": "^8.2.4",
     "@tanstack/react-query": "^5.85.3",
     "@vercel/analytics": "^1.5.0",
@@ -25,6 +26,7 @@
     "nuqs": "^2.4.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
     "react-share": "^5.2.2",
@@ -34,7 +36,8 @@
     "tmdb-ts": "^2.0.2",
     "use-long-press": "^3.3.0",
     "vaul": "^1.1.2",
-    "yet-another-react-lightbox": "^3.25.0"
+    "yet-another-react-lightbox": "^3.25.0",
+    "zod": "^4.1.1"
   },
   "devDependencies": {
     "@iconify/react": "^6.0.0",

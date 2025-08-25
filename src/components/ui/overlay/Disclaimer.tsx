@@ -17,6 +17,7 @@ import { IS_BROWSER } from "@/utils/constants";
 const Disclaimer: React.FC = () => {
   const [disclaimer, setDisclaimer] = useLocalStorage<boolean>({
     key: "disclaimer-agreed",
+    defaultValue: false,
     getInitialValueInEffect: false,
   });
   const interval = useInterval(() => setSeconds((s) => s - 1), 1000, {
@@ -34,6 +35,8 @@ const Disclaimer: React.FC = () => {
     if (disclaimer || seconds < 0) {
       interval.stop();
     }
+
+    return () => interval.stop();
   }, [seconds]);
 
   if (disclaimer) return null;
