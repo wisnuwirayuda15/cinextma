@@ -9,7 +9,7 @@ import { memo, useMemo } from "react";
 import { Episode, TvShowDetails } from "tmdb-ts";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import { ADS_WARNING_STORAGE_KEY, SpacingClasses } from "@/utils/constants";
-import { useVidlinkPlayer } from "@/hooks/useVidlinkPlayer";
+import { usePlayerEvents } from "@/hooks/usePlayerEvents";
 const AdsWarning = dynamic(() => import("@/components/ui/overlay/AdsWarning"));
 const TvShowPlayerHeader = dynamic(() => import("./Header"));
 const TvShowPlayerSourceSelection = dynamic(() => import("./SourceSelection"));
@@ -50,7 +50,7 @@ const TvShowPlayer: React.FC<TvShowPlayerProps> = ({
     parseAsInteger.withDefault(0),
   );
 
-  useVidlinkPlayer({
+  usePlayerEvents({
     saveHistory: true,
     metadata: { season: episode.season_number, episode: episode.episode_number },
   });

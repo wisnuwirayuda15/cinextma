@@ -1,8 +1,8 @@
 import { syncHistory } from "@/actions/histories";
-import { VidlinkEventData } from "@/hooks/useVidlinkPlayer";
+import { UnifiedPlayerEventData } from "@/hooks/usePlayerEvents";
 import { NextResponse } from "next/server";
 
-type ResponseBody = VidlinkEventData["data"] & { completed?: boolean };
+type ResponseBody = UnifiedPlayerEventData & { completed?: boolean };
 
 export const POST = async (request: Request) => {
   try {

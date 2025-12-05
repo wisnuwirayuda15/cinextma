@@ -1,14 +1,14 @@
 "use server";
 
 import { tmdb } from "@/api/tmdb";
-import { VidlinkEventData } from "@/hooks/useVidlinkPlayer";
+import { UnifiedPlayerEventData } from "@/hooks/usePlayerEvents";
 import { ActionResponse } from "@/types";
 import { HistoryDetail } from "@/types/movie";
 import { mutateMovieTitle, mutateTvShowTitle } from "@/utils/movies";
 import { createClient } from "@/utils/supabase/server";
 
 export const syncHistory = async (
-  data: VidlinkEventData["data"],
+  data: UnifiedPlayerEventData,
   completed?: boolean,
 ): ActionResponse => {
   console.info("Saving history:", data);
@@ -36,7 +36,7 @@ export const syncHistory = async (
     }
 
     // Validate required fields
-    if (!data.mtmdbId || !data.mediaType) {
+    if (!data.mediaId || !data.mediaType) {
       return {
         success: false,
         message: "Missing required fields",
@@ -53,8 +53,8 @@ export const syncHistory = async (
 
     const media =
       data.mediaType === "movie"
-        ? await tmdb.movies.details(data.mtmdbId)
-        : await tmdb.tvShows.details(data.mtmdbId);
+        ? await tmdb.movies.details(Number(data.mediaId))
+        : await tmdb.tvShows.details(Number(data.mediaId));
 
     // Insert or update history
     const { data: history, error } = await supabase
@@ -62,7 +62,7 @@ export const syncHistory = async (
       .upsert(
         {
           user_id: user.id,
-          media_id: data.mtmdbId,
+          media_id: Number(data.mediaId),
           type: data.mediaType,
           season: data.season || 0,
           episode: data.episode || 0,
