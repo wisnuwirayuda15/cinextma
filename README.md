@@ -72,12 +72,3 @@ Contributions to CINEXTMA are welcome! If you'd like to contribute, please refer
 
 CINEXTMA is licensed under the [MIT License](LICENSE). This means you are free to use, modify, and distribute the application, as long as you include the original copyright and license notice in your work.
 
-## Star History
-
-<a href="https://www.star-history.com/#wisnuwirayuda15/cinextma&Timeline">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=wisnuwirayuda15/cinextma&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=wisnuwirayuda15/cinextma&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=wisnuwirayuda15/cinextma&type=Timeline" />
- </picture>
-</a>
