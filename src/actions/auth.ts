@@ -12,6 +12,7 @@ import {
   ResetPasswordFormInput,
   ResetPasswordFormSchema,
 } from "@/schemas/auth";
+import { env } from "@/utils/env";
 import { z } from "zod";
 import { ActionResponse } from "@/types";
 
@@ -44,7 +45,7 @@ const createAuthAction = <T extends { captchaToken?: string }>(
       return { success: false, message };
     }
 
-    if (!result.data.captchaToken) {
+    if (env.NEXT_PUBLIC_CAPTCHA_SITE_KEY && !result.data.captchaToken) {
       return { success: false, message: "Captcha is required." };
     }
 
