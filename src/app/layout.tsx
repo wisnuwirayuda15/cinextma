@@ -71,8 +71,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </Providers>
           </NuqsAdapter>
         </Suspense>
-        <SpeedInsights debug={false} />
-        <Analytics debug={false} />
+        {/* Vercel-only services, they just 404 on other hosts */}
+        {process.env.VERCEL && (
+          <>
+            <SpeedInsights debug={false} />
+            <Analytics debug={false} />
+          </>
+        )}
       </body>
     </html>
   );

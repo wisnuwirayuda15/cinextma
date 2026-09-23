@@ -93,6 +93,7 @@ const OverviewSection: React.FC<OverviewSectionProps> = ({ movie }) => {
               <Button
                 as={Link}
                 href={`/movie/${movie.id}/player`}
+                prefetch={false}
                 color="primary"
                 variant="shadow"
                 startContent={<FaCirclePlay size={22} />}

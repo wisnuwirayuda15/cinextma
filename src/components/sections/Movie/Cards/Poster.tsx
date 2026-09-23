@@ -47,7 +47,7 @@ const MoviePosterCard: React.FC<MoviePosterCardProps> = ({ movie, variant = "ful
         placement="right-start"
         content={<HoverPosterCard id={movie.id} />}
       >
-        <Link href={`/movie/${movie.id}`} ref={ref} {...longPress()}>
+        <Link href={`/movie/${movie.id}`} prefetch={false} ref={ref} {...longPress()}>
           {variant === "full" && (
             <div className="group motion-preset-focus relative aspect-2/3 overflow-hidden rounded-lg border-[3px] border-transparent text-white transition-colors hover:border-primary">
               {hovered && (

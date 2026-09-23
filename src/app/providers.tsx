@@ -10,7 +10,14 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { usePathname, useRouter } from "next/navigation";
 import useDiscoverFilters from "@/hooks/useDiscoverFilters";
 
-export const queryClient = new QueryClient();
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function Providers({ children }: PropsWithChildren) {
   const { push } = useRouter();

@@ -98,6 +98,7 @@ export const EpisodeListCard: React.FC<EpisodeCardProps> = ({
       isPressable={!isNotReleased}
       as={(isNotReleased ? "div" : Link) as "a"}
       href={href}
+      {...(href && { prefetch: false })}
       shadow="none"
       className={cn(
         "group motion-preset-blur-right border-foreground-200 bg-foreground-100 motion-duration-300 grid grid-cols-[auto_1fr] gap-3 border-2 transition-colors",
@@ -176,6 +177,7 @@ const EpisodeGridCard: React.FC<EpisodeCardProps> = ({ episode, id }) => {
       isPressable={!isNotReleased}
       as={(isNotReleased ? "div" : Link) as "a"}
       href={href}
+      {...(href && { prefetch: false })}
       shadow="none"
       className={cn(
         "group motion-preset-focus border-foreground-200 bg-foreground-100 border-2 transition-colors",
