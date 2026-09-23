@@ -47,7 +47,7 @@ const TvShowPosterCard: React.FC<TvShowPosterCardProps> = ({ tv, variant = "full
         placement="right-start"
         content={<TvShowHoverCard id={tv.id} />}
       >
-        <Link href={`/tv/${tv.id}`} ref={ref} {...longPress()}>
+        <Link href={`/tv/${tv.id}`} prefetch={false} ref={ref} {...longPress()}>
           {variant === "full" && (
             <div className="group motion-preset-focus relative aspect-2/3 overflow-hidden rounded-lg border-[3px] border-transparent text-white transition-colors hover:border-warning">
               {hovered && (

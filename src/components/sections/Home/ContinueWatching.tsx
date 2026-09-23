@@ -12,6 +12,7 @@ const ContinueWatching: React.FC = () => {
   const { data } = useQuery({
     queryFn: () => getUserHistories(),
     queryKey: ["continue-watching"],
+    staleTime: 0, // history changes after every watch session
   });
 
   if (!data?.data) return null;

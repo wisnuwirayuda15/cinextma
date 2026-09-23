@@ -29,7 +29,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ media }) => {
 
   return (
     <>
-      <Link href={getRedirectLink()}>
+      <Link href={getRedirectLink()} prefetch={false}>
         <div
           className={cn(
             "group motion-preset-focus relative aspect-video overflow-hidden rounded-lg text-white",

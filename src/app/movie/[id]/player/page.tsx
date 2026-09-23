@@ -26,6 +26,7 @@ const MoviePlayerPage: NextPage<Params<{ id: number }>> = ({ params }) => {
   const { data: startAt, isPending: isPendingStartAt } = useQuery({
     queryFn: () => getMovieLastPosition(id),
     queryKey: ["movie-player-start-at", id],
+    staleTime: 0,
   });
 
   if (isPending || isPendingStartAt) {

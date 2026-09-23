@@ -103,42 +103,52 @@ export function usePlayerEvents(options: UsePlayerEventsOptions = {}) {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [lastEvent, setLastEvent] = useState<PlayerEventType | null>(null);
-  const [lastCurrentTime, setLastCurrentTime] = useState(0);
 
   const eventDataRef = useRef<UnifiedPlayerEventData | null>(null);
+  const lastSyncedTimeRef = useRef(0);
+
+  // the message/unload listeners are registered once, so read the latest values through refs
+  const userRef = useRef(user);
+  userRef.current = user;
+  const optionsRef = useRef({ saveHistory, metadata });
+  optionsRef.current = { saveHistory, metadata };
+
+  const shouldSync = (data: UnifiedPlayerEventData) => {
+    if (!optionsRef.current.saveHistory || !userRef.current) return false;
+    return diff(data.currentTime, lastSyncedTimeRef.current) > 5; // prevent spam
+  };
+
+  const withMetadata = (data: UnifiedPlayerEventData): UnifiedPlayerEventData => ({
+    ...data,
+    season: data.season || optionsRef.current.metadata?.season || 0,
+    episode: data.episode || optionsRef.current.metadata?.episode || 0,
+  });
 
   const syncToServer = async (data: UnifiedPlayerEventData, completed?: boolean) => {
-    if (!saveHistory || !user) return;
-    if (diff(data.currentTime, lastCurrentTime) <= 5) return; // prevent spam
+    if (!completed && !shouldSync(data)) return;
+    if (!optionsRef.current.saveHistory || !userRef.current) return;
 
-    const payload: UnifiedPlayerEventData = {
-      ...data,
-      season: data.season || metadata?.season || 0,
-      episode: data.episode || metadata?.episode || 0,
-    };
-
-    const { success, message } = await syncHistory(payload, completed);
-    if (success) setLastCurrentTime(data.currentTime);
+    const { success, message } = await syncHistory(withMetadata(data), completed);
+    if (success) lastSyncedTimeRef.current = data.currentTime;
     else console.error("Save history failed:", message);
   };
 
+  // save progress once each time the tab gets hidden
   useEffect(() => {
-    if (!saveHistory || !user) return;
     if (documentState === "visible") return;
     if (!eventDataRef.current) return;
     syncToServer(eventDataRef.current);
-  }, [documentState, lastCurrentTime]);
+  }, [documentState]);
 
   useEffect(() => {
     const handleBeforeUnload = () => {
-      if (!saveHistory || !user) return;
-      if (!eventDataRef.current) return;
+      const data = eventDataRef.current;
+      if (!data || !shouldSync(data)) return;
 
-      const payload = {
-        ...eventDataRef.current,
-        completed: eventDataRef.current.event === "ended",
-      };
-      navigator.sendBeacon("/api/player/save-history", JSON.stringify(payload));
+      const payload = { ...withMetadata(data), completed: data.event === "ended" };
+      if (navigator.sendBeacon("/api/player/save-history", JSON.stringify(payload))) {
+        lastSyncedTimeRef.current = data.currentTime;
+      }
     };
 
     const handleMessage = (event: MessageEvent) => {
@@ -190,7 +200,7 @@ export function usePlayerEvents(options: UsePlayerEventsOptions = {}) {
     window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      if (eventDataRef.current) handleBeforeUnload();
+      handleBeforeUnload();
       window.removeEventListener("message", handleMessage);
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
