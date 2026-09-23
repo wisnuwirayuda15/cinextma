@@ -1,4 +1,4 @@
-import { tmdb } from "@/api/tmdb";
+import { tmdb } from "@/api/tmdb-client";
 import { ContentType } from "@/types";
 import { cn } from "@/utils/helpers";
 import { Select, SelectItem, SelectProps } from "@heroui/react";
