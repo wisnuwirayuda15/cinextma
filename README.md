@@ -53,13 +53,13 @@ git clone https://github.com/wisnuwirayuda15/cinextma.git
 
 ```
 cd cinextma
-npm install
+bun install
 ```
 
 3. Start the development server:
 
 ```
-npm run dev
+bun dev
 ```
 
 4. Open your browser and visit `http://localhost:3000` to access the CINEXTMA application.
