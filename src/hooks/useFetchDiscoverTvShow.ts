@@ -1,6 +1,6 @@
 "use client";
 
-import { tmdb } from "@/api/tmdb";
+import { tmdb } from "@/api/tmdb-client";
 import { DiscoverTvShowsFetchQueryType } from "@/types/movie";
 import { TvShowDiscoverResult } from "tmdb-ts/dist/types/discover";
 

@@ -1,4 +1,4 @@
-import { tmdb } from "@/api/tmdb";
+import { tmdb } from "@/api/tmdb-client";
 import { SiteConfigType } from "@/types";
 import { BiSearchAlt2, BiSolidSearchAlt2 } from "react-icons/bi";
 import { GoHomeFill, GoHome } from "react-icons/go";

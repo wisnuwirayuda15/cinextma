@@ -1,6 +1,6 @@
 "use client";
 
-import { getSearchSuggestions } from "@/actions/search";
+import { getSearchSuggestions } from "@/utils/search";
 import SearchInput from "@/components/ui/input/SearchInput";
 import ContentTypeSelection from "@/components/ui/other/ContentTypeSelection";
 import Highlight from "@/components/ui/other/Highlight";

@@ -1,6 +1,6 @@
 "use client";
 
-import { tmdb } from "@/api/tmdb";
+import { tmdb } from "@/api/tmdb-client";
 import { Params } from "@/types";
 import { Spinner } from "@heroui/react";
 import { useScrollIntoView } from "@mantine/hooks";
@@ -32,11 +32,8 @@ const TVShowDetailPage: NextPage<Params<{ id: number }>> = ({ params }) => {
         "images",
         "videos",
         "credits",
-        "keywords",
         "recommendations",
         "similar",
-        "reviews",
-        "watch/providers",
       ]),
     queryKey: ["tv-show-detail", id],
   });

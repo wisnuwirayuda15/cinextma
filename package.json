@@ -38,6 +38,7 @@
     "react-icons": "^5.5.0",
     "react-intersection-observer": "^9.16.0",
     "react-share": "^5.2.2",
+    "server-only": "^0.0.1",
     "string-ts": "^2.2.1",
     "tailwindcss-motion": "^1.1.1",
     "tmdb-ts": "^2.0.2",

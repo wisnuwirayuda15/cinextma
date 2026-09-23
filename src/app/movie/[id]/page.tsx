@@ -3,7 +3,7 @@
 import { Suspense, use } from "react";
 import { Spinner } from "@heroui/spinner";
 import { useQuery } from "@tanstack/react-query";
-import { tmdb } from "@/api/tmdb";
+import { tmdb } from "@/api/tmdb-client";
 import { Cast } from "tmdb-ts/dist/types/credits";
 import { notFound } from "next/navigation";
 import { Image } from "tmdb-ts";
@@ -29,11 +29,8 @@ const MovieDetailPage: NextPage<Params<{ id: number }>> = ({ params }) => {
         "images",
         "videos",
         "credits",
-        "keywords",
         "recommendations",
         "similar",
-        "reviews",
-        "watch/providers",
       ]),
     queryKey: ["movie-detail", id],
   });
